@@ -1,4 +1,3 @@
-// src/main.js
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -28,6 +27,18 @@ const messages = {
     birthdate: 'Birthdate:',
     cancel: 'Cancel',
     kvkNumber: 'KVK number:',
+    chooseWallet: 'Choose an organizational wallet',
+    createOrganizationalWallet: 'Create organizational wallet',
+    connectExistingWallet: 'Connect existing organizational wallet',
+    alreadyHaveWallet: 'Already have an organizational wallet?',
+    organizationalWallet: 'Organizational wallet',
+    createWalletFlow: 'The create organizational wallet flow at Gimly should now be initialized.',
+    connectWalletTitle: 'Connect your organizational wallet',
+    connectWalletSubtitle: 'We have to connect your installed organizational wallet with our data to activate the wallet. Please provide below\'s information to validate your organizational wallet:',
+    walletUrl: 'URL to organizational wallet:',
+    validate: 'Validate wallet',
+    close: 'Close',
+    cancel: 'Cancel',
   },
   nl: {
     myKvk: 'Mijn KVK',
@@ -51,6 +62,18 @@ const messages = {
     birthdate: 'Geboortedatum:',
     cancel: 'Annuleren',
     kvkNumber: 'KVK nummer:',
+    chooseWallet: 'Kies een organisatie wallet',
+    createOrganizationalWallet: 'Maak organisatie wallet aan',
+    connectExistingWallet: 'Verbind bestaande organisatie wallet',
+    alreadyHaveWallet: 'Heeft u al een organisatie wallet?',
+    organizationalWallet: 'Organisatie wallet',
+    createWalletFlow: 'De aanmaak van de organisatie wallet bij Gimly zou nu moeten starten.',
+    connectWalletTitle: 'Verbind uw organisatie wallet',
+    connectWalletSubtitle: 'We moeten uw geïnstalleerde organisatie wallet met onze gegevens verbinden om de wallet te activeren. Geef hieronder de informatie op om uw organisatie wallet te valideren:',
+    walletUrl: 'URL naar organisatie wallet:',
+    validate: 'Valideer wallet',
+    close: 'Sluiten',
+    cancel: 'Annuleren',
   }
 }
 
