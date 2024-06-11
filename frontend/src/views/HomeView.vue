@@ -150,7 +150,8 @@ const goToPortal = async () => {
     })
 
     if (response.ok) {
-      router.push({ path: '/portal' })
+      const data = await response.json(); // Assume the response is in JSON format
+      router.push({ path: '/portal', query: { data: JSON.stringify(data) } })
     } else {
       console.error('Failed to log in')
       isErrorVisible.value = true

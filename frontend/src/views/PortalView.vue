@@ -11,30 +11,34 @@
           <div class="mt-4">
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
               <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">{{ t('organisationName') }}</h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ t('organisationDetails') }}</p>
+                <h3 class="text-lg leading-6 font-medium text-gray-900">{{ organisationName }}</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ organisationDetails }}</p>
               </div>
               <div class="border-t border-gray-200">
                 <dl>
-                  <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div v-if="showDetails" class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">{{ t('activities') }}</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ t('activityDetails') }}</dd>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ activityDetails }}</dd>
                   </div>
-                  <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div v-if="showDetails" class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">{{ t('visitAddress') }}</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ t('addressDetails') }}</dd>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ addressDetails }}</dd>
                   </div>
-                  <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div v-if="showDetails" class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">{{ t('phoneNumber') }}</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ t('phoneDetails') }}</dd>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ phoneDetails }}</dd>
                   </div>
                   <div class="bg-white px-4 py-5 sm:px-6">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900">{{ t('viewAllDetails') }}</a>
+                    <a href="#" @click.prevent="toggleDetails" class="text-indigo-600 hover:text-indigo-900">
+                      {{ showDetails ? t('viewLessDetails') : t('viewAllDetails') }}
+                    </a>
                   </div>
+
                 </dl>
               </div>
               <div class="bg-white px-4 py-5 sm:px-6">
-                <h3 class="text-xl mb-4 leading-6 font-medium text-gray-900">{{ t('organizationalWallet') }}</h3>
+                <h3 class="text-xl mb-4 leadin      viewAllDetails: 'Inzien alle gegevens',
+      viewLessDetails: 'Laat minder zien',g-6 font-medium text-gray-900">{{ t('organizationalWallet') }}</h3>
                 <label for="wallet" class="block text-sm font-medium text-gray-700">{{ t('chooseWallet') }}</label>
                 <select id="wallet" v-model="selectedWallet" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <option value="Gimly">Gimly</option>
@@ -82,7 +86,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import NavigationBar from '@/components/NavigationBar.vue'
 
@@ -92,15 +97,11 @@ const { t } = useI18n({
       myKvk: 'My KVK',
       welcomeMessage: 'You are logged into My KVK. Below you see the organizations where you fulfill a role and the details of the organizations.',
       organisations: 'Organisations',
-      organisationName: 'Nieuwlaar Engineering',
-      organisationDetails: 'KVK number: 70123101, Function(s): Owner',
       activities: 'Activities',
-      activityDetails: 'SBI code: 6201, Developing, producing, and publishing software',
       visitAddress: 'Visit Address',
-      addressDetails: 'Oudegracht 61 G, 3511AD Utrecht',
       phoneNumber: 'Phone Number',
-      phoneDetails: '(+31) 0645957523',
       viewAllDetails: 'View all details',
+      viewLessDetails: 'View less details',
       chooseWallet: 'Choose an organizational wallet',
       createOrganizationalWallet: 'Create organizational wallet',
       connectExistingWallet: 'Connect existing organizational wallet',
@@ -118,15 +119,11 @@ const { t } = useI18n({
       myKvk: 'Mijn KVK',
       welcomeMessage: 'Je bent ingelogd bij Mijn KVK. Hieronder zie je de organisaties waar je een functie vervult en de gegevens van de organisaties.',
       organisations: 'Organisaties',
-      organisationName: 'Nieuwlaar Engineering',
-      organisationDetails: 'KVK-nummer: 70123101, Functie(s): Eigenaar',
       activities: 'Bedrijfsactiviteiten',
-      activityDetails: 'SBI code: 6201, Ontwikkelen, produceren en uitgeven van software',
       visitAddress: 'Bezoekadres',
-      addressDetails: 'Oudegracht 61 G, 3511AD Utrecht',
       phoneNumber: 'Telefoonnummer',
-      phoneDetails: '(+31) 0645957523',
       viewAllDetails: 'Inzien alle gegevens',
+      viewLessDetails: 'Laat minder zien',
       chooseWallet: 'Kies een organisatie wallet',
       createOrganizationalWallet: 'Maak organisatie wallet aan',
       connectExistingWallet: 'Verbind bestaande organisatie wallet',
@@ -143,10 +140,21 @@ const { t } = useI18n({
   }
 })
 
+const route = useRoute();
 const selectedWallet = ref('Gimly')
 const isCreateWalletPopupVisible = ref(false)
 const isConnectWalletPopupVisible = ref(false)
 const walletUrl = ref('')
+
+// New reactive properties for the organisation details
+const organisationName = ref('')
+const organisationDetails = ref('')
+const activityDetails = ref('')
+const addressDetails = ref('')
+const phoneDetails = ref('')
+
+// State to control the visibility of the additional details
+const showDetails = ref(false)
 
 const showCreateWalletPopup = () => {
   isCreateWalletPopupVisible.value = true
@@ -165,8 +173,29 @@ const hideConnectWalletPopup = () => {
 }
 
 const validateWallet = () => {
-  // Add your validation logic here
   console.log('Validating wallet with URL:', walletUrl.value)
   hideConnectWalletPopup()
 }
+
+// Function to toggle the visibility of the additional details
+const toggleDetails = () => {
+  event.preventDefault();
+  showDetails.value = !showDetails.value
+}
+
+onMounted(() => {
+  if (route.query.data) {
+    const data = JSON.parse(route.query.data);
+    console.log('Data received:', data);
+
+    const bevoegdheidUittreksel = data.bevoegdheidUittreksel;
+
+    // Update the reactive properties with the received data
+    organisationName.value = bevoegdheidUittreksel.naam;
+    organisationDetails.value = `KVK number: ${bevoegdheidUittreksel.kvkNummer}, Function(s): ${bevoegdheidUittreksel.functionarissen ? bevoegdheidUittreksel.functionarissen.map(f => f.functie || f.typeFunctionaris).join(', ') : ''}`;
+    activityDetails.value = `SBI code: ${bevoegdheidUittreksel.sbiActiviteit}`;
+    addressDetails.value = bevoegdheidUittreksel.adres;
+    phoneDetails.value = bevoegdheidUittreksel.telefoon;
+  }
+});
 </script>
