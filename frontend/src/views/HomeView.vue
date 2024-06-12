@@ -12,7 +12,7 @@
                 <p class="mt-1 text-gray-600">{{ t('depositYourAnnual') }}</p>
               </div>
               <div class="px-6 pt-4 pb-2">
-                <button class="flex items-center px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 w-full">
+                <button @click="navigateToPortalDirectly" class="flex items-center px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 w-full">
                   <img src="/src/img/digid.png" alt="Login" class="h-6 mr-4" />
                   <span class="flex-1 text-left font-medium text-gray-700">{{ t('loginWithDigiD') }}</span>
                   <ChevronRightIcon class="h-6 w-6 text-gray-900" aria-hidden="true" />
@@ -116,6 +116,10 @@ const familyName = ref('Klaassen')
 const name = ref('Jan')
 const birthdate = ref('1969-07-09')
 const kvkNumber = ref('90000001')
+
+const navigateToPortalDirectly = () => {
+  router.push({ path: '/portal' });
+}
 
 const showPopup = () => {
   isPopupVisible.value = true
