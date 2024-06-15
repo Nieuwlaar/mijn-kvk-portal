@@ -91,7 +91,7 @@
       <div class="bg-white rounded-lg overflow-hidden shadow-lg max-w-md w-full">
         <div class="px-6 py-4">
           <h2 class="text-xl font-semibold text-gray-800">Failed to log in</h2>
-          <p class="mt-1 text-gray-600">Does the gimly-kvk-api-consumer work correctly?</p>
+          <p class="mt-1 text-gray-600">Does the kvk-api-consumer work correctly?</p>
           <div class="px-6 py-4 flex justify-center">
             <button @click="hideErrorPopup" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Close</button>
           </div>

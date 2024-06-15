@@ -41,6 +41,8 @@
       viewLessDetails: 'Laat minder zien',g-6 font-medium text-gray-900">{{ t('organizationalWallet') }}</h3>
                 <label for="wallet" class="block text-sm font-medium text-gray-700">{{ t('chooseWallet') }}</label>
                 <select id="wallet" v-model="selectedWallet" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <option value="Credenco">Credenco</option>
+                  <option value="Sphereon">Sphereon</option>
                   <option value="Gimly">Gimly</option>
                   <option value="Archipels">Archipels</option>
                 </select>
@@ -107,7 +109,7 @@ const { t } = useI18n({
       connectExistingWallet: 'Connect existing organizational wallet',
       alreadyHaveWallet: 'Already have an organizational wallet?',
       organizationalWallet: 'Organizational wallet',
-      createWalletFlow: 'The create organizational wallet flow at Gimly should now be initialized.',
+      createWalletFlow: 'The create organizational wallet flow should now be initialized.',
       connectWalletTitle: 'Connect your organizational wallet',
       connectWalletSubtitle: 'We have to connect your installed organizational wallet with our data to activate the wallet. Please provide below\'s information to validate your organizational wallet:',
       walletUrl: 'URL to organizational wallet:',
@@ -129,7 +131,7 @@ const { t } = useI18n({
       connectExistingWallet: 'Verbind bestaande organisatie wallet',
       alreadyHaveWallet: 'Heeft u al een organisatie wallet?',
       organizationalWallet: 'Organisatie wallet',
-      createWalletFlow: 'De aanmaak van de organisatie wallet bij Gimly zou nu moeten starten.',
+      createWalletFlow: 'De aanmaak van de organisatie wallet zou nu moeten starten.',
       connectWalletTitle: 'Verbind uw organisatie wallet',
       connectWalletSubtitle: 'We moeten uw geïnstalleerde organisatie wallet met onze gegevens verbinden om de wallet te activeren. Geef hieronder de informatie op om uw organisatie wallet te valideren:',
       walletUrl: 'URL naar organisatie wallet:',
@@ -141,7 +143,7 @@ const { t } = useI18n({
 })
 
 const route = useRoute();
-const selectedWallet = ref('Gimly')
+const selectedWallet = ref('Credenco')
 const isCreateWalletPopupVisible = ref(false)
 const isConnectWalletPopupVisible = ref(false)
 const walletUrl = ref('')
