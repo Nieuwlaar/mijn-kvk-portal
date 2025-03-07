@@ -232,7 +232,7 @@ const issueAttestation = async (attestationType) => {
       ? '/issue-attestation/lpid' 
       : '/issue-attestation/eucc';
 
-    const response = await fetch(`https://ewc-issuer.nieuwlaar.com/${endpoint}`, {
+    const response = await fetch(`https://kvk-issuance-service.nieuwlaar.com/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -317,7 +317,7 @@ onMounted(async () => {
   const data = ref(null);
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://localhost:3333/api/company-certificate/${kvkNumber.value}`);
+      const response = await fetch(`https://kvk-issuance-service.nieuwlaar.com/bevoegdheid/company-certificate/${kvkNumber.value}`);
       if (response.ok) {
         const fetchedData = await response.json();
         data.value = fetchedData; // Update the reactive state
@@ -347,7 +347,7 @@ const createWallet = async () => {
   try {
     // Step 1: Fetch the JWT token
     console.log('Fetching JWT token for organization:', kvkNumber.value);
-    const jwtResponse = await fetch(`https://ewc-issuer.nieuwlaar.com/${kvkNumber.value}/jwt_token`);
+    const jwtResponse = await fetch(`https://kvk-issuance-service.nieuwlaar.com/${kvkNumber.value}/jwt_token`);
     if (!jwtResponse.ok) {
       throw new Error('Failed to fetch JWT token');
     }
