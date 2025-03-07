@@ -317,7 +317,12 @@ onMounted(async () => {
   const data = ref(null);
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://kvk-issuance-service.nieuwlaar.com/bevoegdheid/company-certificate/${kvkNumber.value}`);
+      const response = await fetch(`https://kvk-issuance-service.nieuwlaar.com/bevoegdheid/company-certificate/${kvkNumber.value}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const fetchedData = await response.json();
         data.value = fetchedData; // Update the reactive state
