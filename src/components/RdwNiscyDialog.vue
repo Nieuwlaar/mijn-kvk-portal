@@ -102,7 +102,7 @@ onMounted(async () => {
     isLoading.value = true
     
     // First make the power of representation call
-    const powerOfRepUrl = 'http://127.0.0.1:8000/rdw-niscy/power-of-representation'
+    const powerOfRepUrl = 'https://kvk-issuance-service.nieuwlaar.com/rdw-niscy/power-of-representation'
     const powerOfRepBody = {
       "legal_person_identifier": `NLNHR.${props.kvkNumber}`,
       "legal_name": props.legalName
