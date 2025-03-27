@@ -46,8 +46,9 @@
 
           <!-- EUDI Link Section -->
           <div class="space-y-2">
-            <!-- Add wallet trigger button -->
+            <!-- Add wallet trigger button - Only show when credentialOfferUri is available -->
             <button 
+              v-if="credentialOfferUri"
               @click="openWallet(credentialOfferUri)"
               class="w-full mb-2 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 flex items-center justify-center space-x-2"
             >
@@ -57,23 +58,26 @@
               <span>Open in Wallet</span>
             </button>
 
-            <p class="text-sm text-gray-600">Credential Offer URI:</p>
-            <div class="flex items-center space-x-2">
-              <input 
-                type="text" 
-                :value="credentialOfferUri" 
-                readonly 
-                class="flex-1 p-2 border rounded-md text-sm"
-              />
-              <button 
-                @click="copyToClipboard(credentialOfferUri)"
-                class="p-2 text-blue-600 hover:text-blue-800"
-              >
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-            </div>
+            <!-- Only show URI section when credentialOfferUri is available -->
+            <template v-if="credentialOfferUri">
+              <p class="text-sm text-gray-600">Credential Offer URI:</p>
+              <div class="flex items-center space-x-2">
+                <input 
+                  type="text" 
+                  :value="credentialOfferUri" 
+                  readonly 
+                  class="flex-1 p-2 border rounded-md text-sm"
+                />
+                <button 
+                  @click="copyToClipboard(credentialOfferUri)"
+                  class="p-2 text-blue-600 hover:text-blue-800"
+                >
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+            </template>
           </div>
         </div>
       </div>
