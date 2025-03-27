@@ -46,6 +46,17 @@
 
           <!-- EUDI Link Section -->
           <div class="space-y-2">
+            <!-- Add wallet trigger button -->
+            <button 
+              @click="openWallet(credentialOfferUri)"
+              class="w-full mb-2 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 flex items-center justify-center space-x-2"
+            >
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18v-6m0 0l-4 4m4-4l4 4m-4-12v2" />
+              </svg>
+              <span>Open in Wallet</span>
+            </button>
+
             <p class="text-sm text-gray-600">Credential Offer URI:</p>
             <div class="flex items-center space-x-2">
               <input 
@@ -148,6 +159,10 @@ const copyToClipboard = async (text) => {
   } catch (err) {
     console.error('Failed to copy text: ', err)
   }
+}
+
+const openWallet = (uri) => {
+  window.location.href = uri
 }
 </script>
 
